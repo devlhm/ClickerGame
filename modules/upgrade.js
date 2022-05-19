@@ -1,13 +1,25 @@
 import { increaseClickAmount } from "./input.js";
 import { increasePassiveIncomeAmt } from "./passiveIncome.js";
+import { updateUpgradePriceLabel } from "./ui.js";
 
 class Upgrade {
-	constructor(type, title, description, value, price) {
+	constructor(type, title, description, value, basePrice) {
 		this.type = type;
 		this.title = title;
 		this.description = description;
 		this.value = value;
-		this.price = price;
+		this.basePrice = basePrice;
+		this.level = 1;
+
+		this.price = this.basePrice
+	}
+
+	levelUp() {
+		this.level++;
+		this.price = Math.round((this.price/100)*15 + this.price)
+		console.log(this.price)
+		installUpgrade(this);
+		updateUpgradePriceLabel(this);
 	}
 }
 

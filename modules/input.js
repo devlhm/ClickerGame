@@ -24,10 +24,7 @@ function upgradeBought(upgradeIndex) {
 	if (upgrade.price <= kilometers) {
 		decreaseKilometers(upgrade.price);
 		installUpgrade(upgrade);
-		const upgradeElement = document.querySelector(
-			`[data-upgrade-index="${upgradeIndex}"]`
-		);
-		upgradeElement.parentNode.removeChild(upgradeElement);
+		upgrade.levelUp();
 	}
 }
 

@@ -1,14 +1,16 @@
-import { updateKilometersLabel, renderUpgrades } from "./modules/ui.js";
+import { updateKilometersLabel, renderUpgrades, updateKmPerSecLabel } from "./modules/ui.js";
 import { Upgrade, UpgradeTypes } from "./modules/upgrade.js";
 
 let kilometers = 0;
+let deltaKm = 0;
+
 const upgrades = [
 	new Upgrade(
 		UpgradeTypes.INCREASE_CLICK_AMOUNT,
 		"Pneus Novos",
 		"Aumenta a quantidade andada por clique em 2!",
 		2,
-		1
+		10
 	),
 	new Upgrade(
 		UpgradeTypes.INCREASE_PASSIVE_INCOME,
@@ -22,9 +24,16 @@ const upgrades = [
 renderUpgrades(upgrades);
 
 function updateKilometers(newKm) {
+	const difference = newKm - kilometers
+	deltaKm += difference > 0 ? difference : 0;
 	kilometers = newKm;
-	updateKilometersLabel();
+	updateKilometersLabel(deltaKm);
 }
+
+setInterval(() => {
+	updateKmPerSecLabel(deltaKm);
+	deltaKm = 0;
+}, 1000);
 
 const increaseKilometers = (factor) => updateKilometers(kilometers + factor);
 const decreaseKilometers = (factor) => updateKilometers(kilometers - factor);
