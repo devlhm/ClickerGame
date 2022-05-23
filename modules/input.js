@@ -1,18 +1,18 @@
 import { installUpgrade } from "./upgrade.js";
 import {
-	kilometers,
-	increaseKilometers,
-	decreaseKilometers,
+	meters,
+	increaseMeters,
+	decreaseMeters,
 	upgrades,
 } from "../index.js";
 import { increasePassiveIncomeAmt } from "./passiveIncome.js";
 
-let clickAmount = 1;
+let clickAmount = 2;
 
 const moveButtonId = "move-button";
 document
 	.getElementById(moveButtonId)
-	.addEventListener("click", (event) => increaseKilometers(clickAmount));
+	.addEventListener("click", (event) => increaseMeters(clickAmount));
 
 function increaseClickAmount(factor) {
 	clickAmount += factor;
@@ -21,10 +21,9 @@ function increaseClickAmount(factor) {
 function upgradeBought(upgradeIndex) {
 	const upgrade = upgrades[upgradeIndex];
 
-	if (upgrade.price <= kilometers) {
-		decreaseKilometers(upgrade.price);
-		installUpgrade(upgrade);
-		upgrade.levelUp();
+	if (upgrade.price <= meters && upgrade.level < upgrade.maxLevel) {
+		decreaseMeters(upgrade.price);
+		upgrade.levelUp()
 	}
 }
 

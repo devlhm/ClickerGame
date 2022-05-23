@@ -1,4 +1,4 @@
-import { increaseKilometers } from "../index.js";
+import { increaseMeters } from "../index.js";
 
 let passiveIncomeAmt = 0;
 const passiveIncomeInterval = 100; // milisegundos
@@ -24,7 +24,7 @@ let routine = null;
 
 function startRoutine() {
 	routine = setInterval(
-		() => increaseKilometers(passiveIncomeAmt),
+		() => increaseMeters(passiveIncomeAmt),
 		passiveIncomeInterval
 	);
 }

@@ -1,22 +1,22 @@
 import { increaseClickAmount } from "./input.js";
 import { increasePassiveIncomeAmt } from "./passiveIncome.js";
-import { updateUpgradePriceLabel } from "./ui.js";
+import { getUpgradeElement, updateUpgradePriceLabel } from "./ui.js";
 
 class Upgrade {
-	constructor(type, title, description, value, basePrice) {
+	constructor(type, title, description, value, basePrice, maxLevel) {
 		this.type = type;
 		this.title = title;
 		this.description = description;
 		this.value = value;
-		this.basePrice = basePrice;
-		this.level = 1;
-
-		this.price = this.basePrice
+		this.price = basePrice;
+		this.level = 0;
+		this.maxLevel = maxLevel
+		this.bought = false;
 	}
 
 	levelUp() {
 		this.level++;
-		this.price = Math.round((this.price/100)*15 + this.price)
+		this.price = this.level > 1 ? Math.round((this.price/100)*15 + this.price) : this.price;
 		console.log(this.price)
 		installUpgrade(this);
 		updateUpgradePriceLabel(this);
@@ -40,4 +40,16 @@ function installUpgrade(upgrade) {
 	}
 }
 
-export { Upgrade, UpgradeTypes, installUpgrade };
+function checkBuyableUpgrades(upgrades, meters) {
+	upgrades.forEach(upgrade => {
+		const upgradeElement = getUpgradeElement(upgrade);
+
+		if(meters < upgrade.price) {
+			upgradeElement.classList.add("buyBlocked")
+		} else {
+			upgradeElement.classList.remove("buyBlocked")
+		}
+	});
+}
+
+export { Upgrade, UpgradeTypes, installUpgrade, checkBuyableUpgrades };

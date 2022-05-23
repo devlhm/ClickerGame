@@ -1,8 +1,8 @@
-import { updateKilometersLabel, renderUpgrades, updateKmPerSecLabel, bgAnimTimer } from "./modules/ui.js";
-import { Upgrade, UpgradeTypes } from "./modules/upgrade.js";
+import { updateMetersLabel, renderUpgrades, updateMetersPerSecLabel, bgAnimTimer } from "./modules/ui.js";
+import { Upgrade, UpgradeTypes, checkBuyableUpgrades } from "./modules/upgrade.js";
 
-let kilometers = 0;
-let deltaKm = 0;
+let meters = 0;
+let deltaMeters = 0;
 
 const upgrades = [
     new Upgrade(
@@ -10,39 +10,42 @@ const upgrades = [
         "Pneus Novos",
         "Aumenta a quantidade andada por clique em 2!",
         2,
-        10
+        10,
+		10
     ),
     new Upgrade(
         UpgradeTypes.INCREASE_PASSIVE_INCOME,
         "Tijolo no Acelerador!",
         "Aumenta a quantidade andada passivamente em 10!",
         10,
-        100
+        100,
+		10
     ),
 ];
 
 renderUpgrades(upgrades);
 bgAnimTimer();
 
-function updateKilometers(newKm) {
-    const difference = newKm - kilometers
-    deltaKm += difference > 0 ? difference : 0;
-    kilometers = newKm;
-    updateKilometersLabel(deltaKm);
+function updateMeters(newMeters) {
+    const difference = newMeters - meters
+    deltaMeters += difference > 0 ? difference : 0;
+    meters = newMeters;
+    updateMetersLabel();
+	checkBuyableUpgrades(upgrades, newMeters)
 }
 
 setInterval(() => {
-    updateKmPerSecLabel(deltaKm);
-    deltaKm = 0;
+    updateMetersPerSecLabel(deltaMeters);
+    deltaMeters = 0;
 }, 1000);
 
-const increaseKilometers = (factor) => updateKilometers(kilometers + factor);
-const decreaseKilometers = (factor) => updateKilometers(kilometers - factor);
+const increaseMeters = (factor) => updateMeters(meters + factor);
+const decreaseMeters = (factor) => updateMeters(meters - factor);
 
 export {
-    updateKilometers,
-    increaseKilometers,
-    decreaseKilometers,
-    kilometers,
+    updateMeters,
+    increaseMeters,
+    decreaseMeters,
+    meters,
     upgrades,
 };
