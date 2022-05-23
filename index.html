@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vehicle Evolve</title>
-	</head>
-	<body>
-		<h1 id="kilometers-label">0 km</h1>
-		<h3 id="km-per-sec-label">0 km per second</h3>
-		<button id="move-button">Andar</button>
-		<button id="passive-income">Add Passive Income</button>
-	</body>
-	<script src="index.js" type="module"></script>
-	<script src="modules/input.js" type="module"></script>
-	<div id="upgrade-container"></div>
-	<template id="upgrade-template">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Evolve</title>
+</head>
+
+<body>
+    <h1 id="kilometers-label">0 km</h1>
+    <h3 id="km-per-sec-label">0 km per second</h3>
+    <button id="move-button">Andar</button>
+    <button id="passive-income">Add Passive Income</button>
+    <link rel="stylesheet" href="style.css">
+    <div id="upgrade-container"></div>
+    <div id="bg-container"></div>
+    <template id="upgrade-template">
 		<div data-upgrade-index>
 			<h1>Título</h1>
 			<p class="description">Descrição</p>
 			<p class="level">Nível 1</p>
 			<button>Preço</button>
-		</div>
-	</template>
+			</div>
+		</template>
+</body>
+<script src="index.js" type="module"></script>
+<script src="modules/input.js" type="module"></script>
+
 </html>
