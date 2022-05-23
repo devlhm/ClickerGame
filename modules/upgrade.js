@@ -3,7 +3,7 @@ import { increasePassiveIncomeAmt } from "./passiveIncome.js";
 import { getUpgradeElement, updateUpgradePriceLabel } from "./ui.js";
 
 class Upgrade {
-	constructor(type, title, description, value, basePrice, maxLevel) {
+	constructor(type, title, description, value, basePrice, maxLevel, imgUrl) {
 		this.type = type;
 		this.title = title;
 		this.description = description;
@@ -12,11 +12,12 @@ class Upgrade {
 		this.level = 0;
 		this.maxLevel = maxLevel
 		this.bought = false;
+		this.imgUrl = imgUrl;
 	}
 
 	levelUp() {
 		this.level++;
-		this.price = this.level > 1 ? Math.round((this.price/100)*15 + this.price) : this.price;
+		this.price = Math.round((this.price/100)*15 + this.price);
 		console.log(this.price)
 		installUpgrade(this);
 		updateUpgradePriceLabel(this);
@@ -42,12 +43,16 @@ function installUpgrade(upgrade) {
 
 function checkBuyableUpgrades(upgrades, meters) {
 	upgrades.forEach(upgrade => {
+		if(upgrade.level == upgrade.maxLevel) return;
+
 		const upgradeElement = getUpgradeElement(upgrade);
 
 		if(meters < upgrade.price) {
-			upgradeElement.classList.add("buyBlocked")
+			upgradeElement.querySelector(".upgradeIcon").classList.add("buyBlocked");
+			upgradeElement.querySelector(".upgradeButton").classList.add("buyBlocked");
 		} else {
-			upgradeElement.classList.remove("buyBlocked")
+			upgradeElement.querySelector(".upgradeIcon").classList.remove("buyBlocked");
+			upgradeElement.querySelector(".upgradeButton").classList.remove("buyBlocked");
 		}
 	});
 }

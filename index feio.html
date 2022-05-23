@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Evolve</title>
+</head>
+
+<body>
+    <h1 id="meters-label">0m</h1>
+    <h3 id="meters-per-sec-label">0m/s</h3>
+    <button id="move-button">Andar</button>
+    <button id="passive-income">Add Passive Income</button>
+    <link rel="stylesheet" href="style.css">
+    <div id="upgrade-container"></div>
+    <div id="bg-container"></div>
+    <template id="upgrade-template">
+		<div data-upgrade-index class="buyBlocked">
+			<h1>Título</h1>
+			<p class="description">Descrição</p>
+			<p class="level">Nível 0</p>
+			<button>Preço</button>
+			</div>
+		</template>
+</body>
+<script src="index.js" type="module"></script>
+<script src="modules/input.js" type="module"></script>
+
+</html>

@@ -6,6 +6,7 @@ import {
 	upgrades,
 } from "../index.js";
 import { increasePassiveIncomeAmt } from "./passiveIncome.js";
+import { maxPriceLabel } from "./ui.js";
 
 let clickAmount = 2;
 
@@ -24,11 +25,10 @@ function upgradeBought(upgradeIndex) {
 	if (upgrade.price <= meters && upgrade.level < upgrade.maxLevel) {
 		decreaseMeters(upgrade.price);
 		upgrade.levelUp()
+		if (upgrade.level == upgrade.maxLevel){
+			maxPriceLabel(upgrade);
+		}
 	}
 }
-
-document
-	.getElementById("passive-income")
-	.addEventListener("click", () => increasePassiveIncomeAmt(10));
 
 export { increaseClickAmount, upgradeBought };

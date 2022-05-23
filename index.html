@@ -1,30 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <title>Vehicle Evolve</title>
 </head>
-
 <body>
-    <h1 id="meters-label">0m</h1>
-    <h3 id="meters-per-sec-label">0m/s</h3>
-    <button id="move-button">Andar</button>
-    <button id="passive-income">Add Passive Income</button>
-    <link rel="stylesheet" href="style.css">
-    <div id="upgrade-container"></div>
-    <div id="bg-container"></div>
-    <template id="upgrade-template">
-		<div data-upgrade-index class="buyBlocked">
-			<h1>Título</h1>
-			<p class="description">Descrição</p>
-			<p class="level">Nível 0</p>
-			<button>Preço</button>
-			</div>
-		</template>
+    <div class="nav">
+        <h1 class="navText">Vehicle Evolve</h1>
+        <h1 class="navText creators" onclick="document.location.href='creators.html'">Criadores</h1>
+    </div>
+    <div class="container">
+        <!--
+            
+        -->
+        <div class="main" id="bg-container">
+            <h2 class="meters" id="meters-label">0m</h2>
+            <h3 class="meters perSecond" id="meters-per-sec-label">0m/s</h3>
+            <img id="move-button" class="vehicleImg" src="img/placeholder.png">
+        </div>
+        <!--
+
+        -->
+        <div class="upgrades">
+            <ul class="upgradeList" id="upgrade-container">
+                <h3 class="upgradesTitle">Upgrades</h3>
+
+                <template id="upgrade-template">
+                    <li class="upgradeCard" data-upgrade-index>
+                        <div class="upgradeIcon buyBlocked"></div>
+
+                        <div class="upgradeInfoContainer tooltip">
+                            <h1 class="upgradeTitle">Título</h1>
+                            <span class="tooltiptext description">Aumenta a quantidade andada por clique em 2</span>
+                        </div>
+
+                        <button class="upgradeButton buyBlocked">Preço</button>
+
+                        <div class="progressBarBackground">
+                            <div class="progressBar"></div>
+                        </div>
+                    </li>
+                </template>
+
+                <li class="upgradeCard">
+                    <div class="upgradeIcon buyBlocked"></div>
+                    <div class="upgradeInfoContainer">
+                        <h1 class="upgradeTitle">Upgrade Misterioso</h1>
+                    </div>
+                    <button class="upgradeButton buyBlocked">Bloqueado</button>
+                    <div class="progressBarBackground">
+                        <div id="secondUpProgress" class="progressBar"></div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
 </body>
 <script src="index.js" type="module"></script>
 <script src="modules/input.js" type="module"></script>
-
 </html>

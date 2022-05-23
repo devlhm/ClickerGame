@@ -11,7 +11,8 @@ const upgrades = [
         "Aumenta a quantidade andada por clique em 2!",
         2,
         10,
-		10
+		10,
+        "./img/pneu.png"
     ),
     new Upgrade(
         UpgradeTypes.INCREASE_PASSIVE_INCOME,
@@ -19,7 +20,8 @@ const upgrades = [
         "Aumenta a quantidade andada passivamente em 10!",
         10,
         100,
-		10
+		10,
+        "./img/tijolo.png"
     ),
 ];
 

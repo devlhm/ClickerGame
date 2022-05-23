@@ -5,13 +5,16 @@ function renderUpgrades(upgrades) {
 	const upgradeContainer = document.getElementById("upgrade-container");
 	const upgradeTemplate = document.getElementById("upgrade-template");
 
+	const img = upgradeTemplate.content.querySelector(".upgradeIcon");
 	const title = upgradeTemplate.content.querySelector("h1");
 	const description = upgradeTemplate.content.querySelector(".description");
 	const button = upgradeTemplate.content.querySelector("button");
-	const container = upgradeTemplate.content.querySelector("div");
+	const container = upgradeTemplate.content.querySelector(".upgradeCard");
 
 	for (let index = 0; index < upgrades.length; index++) {
 		const upgrade = upgrades[index];
+
+		img.style.backgroundImage = `url("${ upgrade.imgUrl }")`;
 		title.innerText = upgrade.title;
 		description.innerText = upgrade.description;
 		button.innerText = upgrade.price + "m";
@@ -49,7 +52,14 @@ function getUpgradeElement(upgrade) {
 function updateUpgradePriceLabel(upgrade) {
 	const upgradeElement = getUpgradeElement(upgrade);
 	upgradeElement.querySelector("button").innerText = upgrade.price + "m";
-	upgradeElement.querySelector(".level").innerText = "Nível " + upgrade.level;
+	upgradeElement.querySelector(".progressBar").style.width = (upgrade.level/upgrade.maxLevel) * 100 + "%";
+}
+
+function maxPriceLabel(upgrade){
+	const upgradeElement = getUpgradeElement(upgrade);
+	upgradeElement.querySelector("button").innerText = "Máximo!";
+	upgradeElement.querySelector(".upgradeIcon").classList.add("buyBlocked");
+	upgradeElement.querySelector(".upgradeButton").classList.add("buyBlocked");
 }
 
 function updateMetersLabel() {
@@ -67,4 +77,5 @@ export {
 	updateUpgradePriceLabel,
 	bgAnimTimer,
 	getUpgradeElement,
+	maxPriceLabel,
 };
