@@ -8,18 +8,18 @@ const upgrades = [
     new Upgrade(
         UpgradeTypes.INCREASE_CLICK_AMOUNT,
         "Pneus Novos",
-        "Aumenta a quantidade andada por clique em 2!",
-        2,
-        10,
+        "Aumenta a quantidade andada por clique em 5!",
+        5,
+        80,
 		10,
         "./img/pneu.png"
     ),
     new Upgrade(
         UpgradeTypes.INCREASE_PASSIVE_INCOME,
         "Tijolo no Acelerador!",
-        "Aumenta a quantidade andada passivamente em 10!",
-        10,
-        100,
+        "Aumenta a quantidade andada passivamente em 3!",
+        3,
+        150,
 		10,
         "./img/tijolo.png"
     ),
@@ -36,10 +36,17 @@ function updateMeters(newMeters) {
 	checkBuyableUpgrades(upgrades, newMeters)
 }
 
+const desacelerationPerInterval = .1
+const desacelerationInterval = 100
 setInterval(() => {
-    updateMetersPerSecLabel(deltaMeters);
-    deltaMeters = 0;
+    deltaMeters = Math.max(deltaMeters - (desacelerationPerInterval * deltaMeters), 0);
+}, desacelerationInterval);
+
+setInterval(() => {
+	updateMetersPerSecLabel(deltaMeters);
 }, 1000);
+
+
 
 const increaseMeters = (factor) => updateMeters(meters + factor);
 const decreaseMeters = (factor) => updateMeters(meters - factor);
@@ -49,5 +56,6 @@ export {
     increaseMeters,
     decreaseMeters,
     meters,
+	deltaMeters,
     upgrades,
 };

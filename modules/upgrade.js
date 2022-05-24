@@ -17,7 +17,7 @@ class Upgrade {
 
 	levelUp() {
 		this.level++;
-		this.price = Math.round((this.price/100)*15 + this.price);
+		this.price = Math.round((this.price/100)*50 + this.price);
 		console.log(this.price)
 		installUpgrade(this);
 		updateUpgradePriceLabel(this);

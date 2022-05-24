@@ -8,7 +8,7 @@ import {
 import { increasePassiveIncomeAmt } from "./passiveIncome.js";
 import { maxPriceLabel } from "./ui.js";
 
-let clickAmount = 2;
+let clickAmount = 1.5;
 
 const moveButtonId = "move-button";
 document

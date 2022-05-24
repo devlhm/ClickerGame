@@ -1,4 +1,4 @@
-import { meters, upgrades } from "../index.js";
+import { meters, deltaMeters, upgrades } from "../index.js";
 import { upgradeBought } from "./input.js";
 
 function renderUpgrades(upgrades) {
@@ -34,12 +34,15 @@ function bgAnimTimer() {
 	setTimeout(() => bgAnimTimer(), 10);
 }
 
-let bgSpeed = 0.5;
+let bgSpeedFactor = .02;
+let bgExponencialSpeedFactor = 1.45;
 let bgOffset = 0;
 
 function moveBg() {
+    const bgSpeed = Math.pow((deltaMeters * bgSpeedFactor), bgExponencialSpeedFactor)
+
 	const bg = document.getElementById("bg-container");
-	bgOffset = bgOffset - bgSpeed <= -1000 ? 0 : bgOffset - bgSpeed;
+	bgOffset = bgOffset - bgSpeed // <= -1000 ? 0 : bgOffset - bgSpeed;
 
 	bg.style.backgroundPositionX = bgOffset + "%";
 }
@@ -63,11 +66,11 @@ function maxPriceLabel(upgrade){
 }
 
 function updateMetersLabel() {
-	document.getElementById("meters-label").innerText = meters + "m";
+	document.getElementById("meters-label").innerText = meters.toFixed(1) + "m";
 }
 
 function updateMetersPerSecLabel(deltaMeters) {
-	document.getElementById("meters-per-sec-label").innerText = deltaMeters + "m/s";
+	document.getElementById("meters-per-sec-label").innerText = (deltaMeters * 3.6).toFixed(1) + "km/h";
 }
 
 export {

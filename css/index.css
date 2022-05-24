@@ -60,6 +60,12 @@ body{
     width: 60%;
     height: auto;
 }
+
+.vehicleImg:active{
+    width: 61%;
+    height: auto;
+    margin: 0;
+}
 .upgradesTitle{
     color: #B594B6;
     text-align: center;
